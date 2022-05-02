@@ -1,8 +1,19 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import { useEffect } from 'react';
+import Amplify from 'aws-amplify';
+import type { AppProps } from 'next/app';
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+export default function MyApp({ Component, pageProps }: AppProps) {
+  useEffect(() => {
+    Amplify.configure({
+      ssr: true,
+      Auth: {
+        identityPoolId: process.env.NEXT_PUBLIC_IDENTITY_POOL_ID,
+        region: process.env.NEXT_PUBLIC_REGION,
+        userPoolId: process.env.NEXT_PUBLIC_USER_POOL_ID,
+        userPoolWebClientId: process.env.NEXT_PUBLIC_USER_POOL_WEB_CLIENT_ID,
+      },
+    });
+  }, []);
+
+  return <Component {...pageProps} />;
 }
-
-export default MyApp

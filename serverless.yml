@@ -1,0 +1,5 @@
+testNextApplicationInHere:
+  component: "@sls-next/serverless-component@3.7.0"
+  inputs:
+    bucketName: serverless-bucket-test-next-app
+    enableS3Acceleration: false
